@@ -1,0 +1,226 @@
+{% extends "main/base.html" %} {% load static %} {% block content %}
+
+<div class="container student-profile">
+  <div class="row">
+    <!--
+    leftmost icons and text
+    -->
+    <div class="col-md-3">
+      <img src="{% static 'img/attendance.jpg'%}" alt="" width="50%" />
+      <h6 class="text-muted p-1">Face Recognition</h6>
+    </div>
+    <!--
+    Main heading of the page
+    -->
+    <div class="col-md-6">
+      <div class="heading">
+        <h1 class="text-muted p-1">Attendance System Using Face Recognition</h1>
+      </div>
+    </div>
+
+    <!--
+    top-right buttons to take Attendance and get the Members list
+    -->
+    <div class="col-md-3">
+      <a target="_blank" class="scan" href="{% url 'details' %}"
+        ><input
+          type="submit"
+          class="profile-edit-btn m-2"
+          name="btnAddMore"
+          value="Take Attendance"
+      /></a>
+      <a href="{% url 'student_profile' %}"
+        ><input
+          type="submit"
+          class="profile-edit-btn m-2"
+          name="btnAddMore"
+          value="Members"
+      /></a>
+    </div>
+  </div>
+  <hr />
+
+  <!--
+    Tabs - present, absent and history
+    -->
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <!--
+    Present Tab - shows list of present members
+    -->
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link active"
+        id="present-tab"
+        data-toggle="tab"
+        href="#present"
+        role="tab"
+        aria-controls="home"
+        aria-selected="true"
+        >Present</a
+      >
+    </li>
+
+    <!--
+    Absent Tabs - Shows list of absent members
+    -->
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link"
+        id="absent-tab"
+        data-toggle="tab"
+        href="#absent"
+        role="tab"
+        aria-controls="profile"
+        aria-selected="false"
+        >Absent</a
+      >
+    </li>
+
+    <!--
+    History Tab - shows history of the process
+    -->
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link"
+        id="history-tab"
+        data-toggle="tab"
+        href="#history"
+        role="tab"
+        aria-controls="contact"
+        aria-selected="false"
+        >History</a
+      >
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <br />
+    <!--
+    Shows the details of present tab -> shows name , roll number, Designation and Attendance time
+    -->
+    <div
+      class="tab-pane fade show active"
+      id="present"
+      role="tabpanel"
+      aria-labelledby="home-tab"
+    >
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Roll Number</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Attendance Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for profile in present %}
+          <tr>
+            <th scope="row">-</th>
+            <td>{{profile.first_name}} {{profile.last_name}}</td>
+            <td>{{profile.roll_number}}</td>
+            <td>{{profile.profession}}</td>
+            <td>{{profile.updated |date:"d-m-y D H:i:s"}}</td>
+          </tr>
+          {% endfor%}
+        </tbody>
+      </table>
+      <!--
+    buttons to reset and refresh the present members list
+    -->
+      <a href="{% url 'reset' %}"
+        ><button type="button" class="btn btn-outline-secondary">
+          Reset
+        </button></a
+      >
+      <a href="{% url 'index' %}"
+        ><button type="button" class="btn btn-outline-primary">
+          Refresh
+        </button></a
+      >
+    </div>
+
+    <!--
+      shows list of absentees with name Designation and roll number
+    -->
+    <div
+      class="tab-pane fade"
+      id="absent"
+      role="tabpanel"
+      aria-labelledby="profile-tab"
+    >
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Roll Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for profile in absent %}
+          <tr>
+            <th scope="row">-</th>
+            <td>{{profile.first_name}} {{profile.last_name}}</td>
+            <td>{{profile.profession}}</td>
+            <td>{{profile.roll_number}}</td>
+          </tr>
+          {% endfor%}
+        </tbody>
+      </table>
+    </div>
+
+    <!--
+    shows history of the process with profile id and date
+    -->
+    <div
+      class="tab-pane fade"
+      id="history"
+      role="tabpanel"
+      aria-labelledby="contact-tab"
+    >
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Profile Id</th>
+
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for face in scanned %}
+          <tr>
+            <th scope="row">-</th>
+            <td>{{face.last_face}}</td>
+            <td>{{face.date}}</td>
+          </tr>
+          {% endfor%}
+        </tbody>
+      </table>
+
+      <!--
+    button to clear history
+    -->
+      <a href="{% url 'clear_history' %}"
+        ><button type="button" class="btn btn-outline-secondary">
+          Clear History
+        </button></a
+      >
+    </div>
+  </div>
+</div>
+
+<script>
+  $(".scan").click(function () {
+    var postData = { csrfmiddlewaretoken: "{{ csrf_token }}" };
+    $.ajax({
+      url: "{% url 'scan' %}",
+      data: {},
+    });
+  });
+</script>
+
+{% endblock content %}

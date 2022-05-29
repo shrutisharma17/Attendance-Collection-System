@@ -1,0 +1,236 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+
+<!--
+    if there are no members present
+-->
+{% if profile == None %}
+<div class="container student-profile">
+
+    <div class="row">
+
+        <!--
+        image for presentation
+        -->
+        <div class="col-md-6">
+            <div>
+                <img src="{% static 'img/attendance2.jpg'%}" alt="" width="99%">
+            </div>
+        </div>
+
+        <!--
+        instructions
+        -->
+        <div class="col-md-5">
+            <h2 class="text-muted p-1">Please Wait...</h2>
+            <h1 class="text-muted p-1">The scanner is running</h1>
+            <br>
+            <div class="alert alert-danger">
+                
+
+                <p><b>Note: </b>
+                <ul>
+                    <li>If your computer hardware does not match the requirements
+                         of the recognition software, the scanner will take some time to load.
+                    </li>
+                    <li>For better performance, provide good lighting and better quality cameras.</li>
+                </ul>
+                <small>(This window will disappear after running the first scan)</small>
+                </p>
+
+            </div>
+        </div>
+        <div class="col-md-1">
+
+        </div>
+
+        
+    </div>
+</div>
+
+
+<!--
+    if there are members present
+-->
+{% else %}
+
+<div class="container student-profile">
+
+        <div class="row">
+            <!--
+            shows profile image of the member
+            -->
+            <div class="col-md-4">
+                <div class = "profile-img">
+                    <img src = "{{ profile.image.url }}" alt="" />
+                    
+                </div>
+            </div>
+
+
+            <!--
+            shows Name and Designation of the member
+            -->
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h2>
+                        {{profile.first_name}} {{profile.last_name}}
+                    </h2>
+                    <h5 style="color: #818182">
+                        {{profile.profession }}
+                    </h5>
+                    
+
+                    <!--
+                    two tabs - About and Academics
+                    -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab"
+                             href="#home" role="tab"
+                                aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab"
+                             href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Academics</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-8">
+
+                <!--
+                shows details of the member
+                -->
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel"
+                     aria-labelledby="home-tab">
+                        <div class="row">                            
+                            <div class="col-md-6">
+                                <br>
+                                <label>Profile Id</label>
+                            </div>
+                            <div class="col-md-6">
+                                <br>
+                                <p>{{profile.id}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{profile.first_name}} {{profile.last_name}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{profile.email}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>0{{profile.phone}}</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <!--
+                    shows Academic details of the member
+                    -->
+                    <div class="tab-pane fade" id="profile" role="tabpanel" 
+                    aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <br>
+                                <label>Designation</label>
+                            </div>
+                            <div class="col-md-6">
+                                <br>
+                                <p>{{ profile.profession }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Roll Number</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{profile.roll_number}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Class</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{profile.class_name}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Subject Code</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{profile.subject_code}}</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!--
+            button to edit information
+            -->
+            <div class="col-md-2">
+                <a href="{% url 'edit_student' profile.id %}"><input type="button" 
+                    class="profile-edit-btn" name="btnAddMore" value="Edit" /></a>
+            </div>
+        </div>
+        <div class="row">
+            <!--
+            shows details of the developer
+            -->
+            <div class="col-md-4">
+                <div class="dev-detail">
+                    <p>Developed by:- Shruti Sharma</p>
+                </div>
+            </div>                       
+        </div>
+</div>
+{% endif %}
+
+
+
+<p id="last_face" class="d-none">{{last_face}}</p>
+{% comment %} Fetches the last detected face for final face recognition and 
+marking the attandance of the user in image. {% endcomment %}
+<script>
+    setInterval(function () {
+        var url = 'http://127.0.0.1:8000/ajax/';
+        var last_face = document.getElementById('last_face').innerHTML;
+        $.ajax({
+            url: url,
+            success: function (data) {
+                if (data != last_face) {
+                    location.reload()
+                }
+            }
+        })
+    }, 3000);
+
+</script>
+
+{% endblock content %}

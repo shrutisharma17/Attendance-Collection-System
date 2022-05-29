@@ -1,0 +1,154 @@
+.fa {
+    padding: 18px;
+    font-size: 40px;
+    width: 55px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-github {
+    background: black;
+    color: white;
+}
+
+.fa-google {
+    background: #dd4b39;
+    color: white;
+}
+
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+.student-profile {
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+
+.profile-img {
+    text-align: center;
+}
+
+.profile-img img {
+    width: 70%;
+    height: 100%;
+}
+
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+    
+}
+
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+
+.heading h1 {
+
+    text-align: center;
+}
+.heading h2 {
+
+    text-align: center;
+}
+
+.heading h5 {
+    color: #333;
+}
+
+
+.heading h6 {
+    color: #0062cc;
+}
+
+.profile-edit-btn {
+    border: none;
+        border-radius: 1.5rem;
+        width: 70%;
+        padding: 2%;
+        font-weight: 600;
+        color: white;
+        cursor: pointer;
+        background-color: #16C79A;
+}
+
+
+.heading .nav-tabs {
+    margin-bottom: 5%;
+}
+
+.heading .nav-tabs .nav-link {
+    font-weight: 600;
+    border: none;
+}
+
+.heading .nav-tabs .nav-link.active {
+    border: none;
+    border-bottom: 2px solid #0062cc;
+}
+
+.dev-detail {
+    padding: 14%;
+    margin-top: -15%;
+}
+
+.dev-detail p {
+    font-size: 17px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+
+.dev-detail a {
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.dev-detail ul {
+    list-style: none;
+}
+
+.profile-tab label {
+    font-weight: 600;
+}
+
+.profile-tab p {
+    font-weight: 600;
+    color: #0062cc;
+}
+
+.carousel-content {
+    position: absolute;
+    bottom: 80%;
+    font-size: 2vw;    
+    top: 5%;
+    z-index: 20;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}

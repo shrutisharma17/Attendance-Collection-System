@@ -1,0 +1,112 @@
+{% extends "main/base.html" %} {% load static %} {% block content %}
+
+<!--
+Form containing entries of inputs to add new member
+-->
+<div class="container student-profile pb-3">
+  <form
+    method="POST"
+    action="."
+    class="needs-validation"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+
+
+    <!--
+      Uploading photograph 
+    -->
+    <div class="row">
+      <div class="col-md-4">
+        <h5 class="text-muted">Upload Your Photo:</h5>
+      
+      <div>
+        <img src="{% static 'img/photo.jpg'%}" alt="" width="100%" />
+      </div>
+      <div class="mt-3">{{form.image}}</div>
+      <br>
+      <div class="alert alert-warning">
+        <small>Use only pictures with proper light and in .jpg format</small>
+      </div>
+    </div>
+
+
+    <!--
+      Uploading other personal Information e.g. name, email , Designation etc.
+    -->
+    <div class="col-md-4">
+      <h5 class="text-muted">Personal Information:</h5>
+      <br />
+
+      <div class="d-flex justify-content-between">
+        <div class="m-1 mr-2">
+          <label class="text-muted"><small>First Name:</small></label>
+          {{form.first_name}}
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <div class="m-1">
+          <label class="text-muted"><small>Last Name:</small></label>
+          {{form.last_name}}
+        </div>
+      </div>
+
+      <div class="ml-1">
+        <label class="text-muted"><small>Phone Number:</small></label>
+        {{form.phone}}
+      </div>
+      <div class="m-1">
+        <label class="text-muted"><small>Email:</small></label>
+        {{form.email}}
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <h5 class="text-muted">Academic Information:</h5>
+      <br />
+      <div class="m-1">
+        <label class="text-muted"><small>Designation:</small></label>
+        {{form.profession}}
+      </div>
+      <div class="m-1">
+        <label class="text-muted"><small>Roll Number:</small></label>
+        {{form.roll_number}}
+      </div>
+      <div class="m-1">
+        <label class="text-muted"><small>Class:</small></label>
+        {{form.class_name}}
+      </div>
+      <div class="m-1">
+        <label class="text-muted"><small>Subject Code:</small></label>
+        {{form.subject_code}}
+      </div>
+    </div>
+
+
+
+    <!--
+      Buttons to to upload the Information and to go back
+    -->
+    <div class="mt-3">
+      <a href="{% url 'student_profile' %}"
+        ><button
+          type="button"
+          class="btn btn-outline-danger m-1"
+          style="float: right"
+        >
+          Back
+        </button></a
+      >
+      <button
+        type="submit"
+        class="btn btn-outline-success m-1"
+        style="float: right"
+      >
+        Upload
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock content %}
