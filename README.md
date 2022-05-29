@@ -22,4 +22,4 @@ Instructions:-
 7. Open the code editor , more preferably Vscode and open this folder in it
 8. Open the terminal and write python manage.py runserver in it to run the project.
 9. Click on the server link beginning with 127.------- to run the project
-10. The starting point of the project is "start.html" in templates in main folder however, it is strongly suggested to run the command python manage.py runserver to run the project as otherwise some featuers may be missing.
+10. The starting point of the project is "start.html" in templates in main folder however, it is strongly suggested to run the command python manage.py runserver to run the project as otherwise some features may be missing.
